@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>203 Atelier — Documentation finale M1 à M34</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nuit:#171A1F; --tole:#21252C; --tole2:#2A2F38; --trait:#39404A;
+  --craie:#DDD9CF; --craie-dim:#8B9099;
+  --bleu:#4C7BA8; --bleu-vif:#7BB0DE; --minium:#C2542A; --vert:#6E9E6C; --ambre:#C99A3E;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--nuit);color:var(--craie);font-family:var(--body);font-size:16px;line-height:1.6;padding:24px}
+.container{max-width:1400px;margin:0 auto}
+h1{font-family:var(--display);font-size:42px;letter-spacing:.05em;text-transform:uppercase;color:var(--bleu-vif);border-bottom:2px solid var(--trait);padding-bottom:12px;margin-bottom:8px}
+.sous-titre{color:var(--craie-dim);font-size:14px;margin-bottom:32px}
+h2{font-family:var(--display);font-size:26px;letter-spacing:.04em;color:var(--bleu-vif);margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--trait)}
+h3{font-family:var(--display);font-size:20px;color:var(--craie);margin:28px 0 8px}
+h4{font-family:var(--display);font-size:16px;color:var(--craie-dim);margin:16px 0 6px}
+p{margin:8px 0}
+.card{background:var(--tole);border:1px solid var(--trait);border-radius:8px;padding:16px;margin:12px 0;transition:all .2s}
+.card:hover{border-color:var(--bleu-vif);transform:translateY(-2px);box-shadow:0 4px 20px rgba(76,123,168,.15)}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-family:var(--mono);margin-right:6px}
+.badge.vert{background:var(--vert);color:#171A1F}
+.badge.bleu{background:var(--bleu);color:#fff}
+.badge.ambre{background:var(--ambre);color:#171A1F}
+.badge.minium{background:var(--minium);color:#fff}
+.badge.trait{background:var(--trait);color:var(--craie)}
+.badge.violet{background:#7B68EE;color:#fff}
+.badge.rose{background:#DB7093;color:#fff}
+.badge.orange{background:#E67E22;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+ul,ol{padding-left:24px;margin:8px 0}
+li{margin:4px 0}
+.table-wrap{overflow:auto;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--tole2);text-align:left;padding:8px 10px;border-bottom:2px solid var(--trait);font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:12px}
+td{padding:6px 10px;border-bottom:1px solid var(--trait)}
+.warning{border-left:4px solid var(--ambre);padding:12px 16px;background:rgba(201,154,62,.1);margin:12px 0}
+.success{border-left:4px solid var(--vert);padding:12px 16px;background:rgba(110,158,108,.1);margin:12px 0}
+.error{border-left:4px solid var(--minium);padding:12px 16px;background:rgba(194,84,42,.1);margin:12px 0}
+.note{border-left:4px solid var(--bleu);padding:12px 16px;background:rgba(76,123,168,.1);margin:12px 0}
+.diagram-container{background:var(--tole);border:1px solid var(--trait);border-radius:8px;padding:20px;margin:12px 0;text-align:center;overflow:auto}
+.diagram-container svg{max-width:100%;height:auto}
+.code-block{background:var(--nuit);border:1px solid var(--trait);border-radius:6px;padding:12px;margin:8px 0;font-family:var(--mono);font-size:12px;overflow:auto;white-space:pre-wrap;color:var(--craie)}
+.separator{height:2px;background:var(--trait);margin:32px 0}
+.toc{background:var(--tole);border:1px solid var(--trait);border-radius:8px;padding:16px;margin:16px 0}
+.toc a{color:var(--craie);text-decoration:none;display:block;padding:4px 0}
+.toc a:hover{color:var(--bleu-vif)}
+.toc .level1{padding-left:0}
+.toc .level2{padding-left:20px}
+.toc .level3{padding-left:40px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>203 · Atelier</h1>
+<div class="sous-titre">
+  <strong>Documentation finale — M1 à M34</strong><br>
+  Architecture générique · Socle + 34 modules · Multi‑modèle · Multi‑langue · 3D · Veille · Panier · Astuces · Événements · Communauté · Gestion de stock
+  <span style="display:block;font-size:13px;color:var(--craie-dim);margin-top:6px">🔍 Cliquez sur les titres pour plus d'informations</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- SOMMAIRE -->
+<div class="toc">
+  <h3 style="margin:0 0 12px;color:var(--bleu-vif)">📋 Sommaire</h3>
+  <a href="#intro" class="level1">1. Introduction</a>
+  <a href="#architecture" class="level1">2. Architecture générale</a>
+  <a href="#modules-liste" class="level2">2.1 Liste des modules (M1 à M34)</a>
+  <a href="#socle" class="level2">2.2 Le socle</a>
+  <a href="#flux" class="level2">2.3 Flux de données</a>
+  <a href="#hub" class="level1">3. Interface utilisateur — Le Hub</a>
+  <a href="#entrees-sorties" class="level1">4. Entrées et sorties</a>
+  <a href="#workflow" class="level1">5. Cas d'usage : pièce sans référence</a>
+  <a href="#modules-detail" class="level1">6. Détail des modules (M1 à M34)</a>
+  <a href="#stock" class="level1">7. Gestion de stock — Modules M30 à M34</a>
+  <a href="#flux-import-export" class="level1">8. Flux d'import et d'export</a>
+  <a href="#juridique" class="level1">9. Aspects juridiques</a>
+  <a href="#audit" class="level1">10. Audit — Points critiques</a>
+  <a href="#guide" class="level1">11. Guide d'utilisation</a>
+  <a href="#annexes" class="level1">12. Annexes</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. INTRODUCTION -->
+<h2 id="intro">1. Introduction</h2>
+<p><strong>Un système générique, modulaire, hors‑ligne d'abord</strong> pour gérer des catalogues de pièces détachées, des planches techniques, des modèles 3D, et accompagner la restauration de véhicules anciens.</p>
+
+<div class="grid">
+  <div class="card"><h4 style="color:var(--vert)">🧱 Socle + modules</h4><p>Socle stable, modules indépendants et détachables.</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">🌐 Multi‑modèle</h4><p>Un socle pour plusieurs modèles ou marques.</p></div>
+  <div class="card"><h4 style="color:var(--ambre)">🗣️ Multi‑langue</h4><p>Aucune langue n'est une clé — traductions externes.</p></div>
+  <div class="card"><h4 style="color:var(--minium)">📄 Droit d'auteur</h4><p>Scans privés, données factuelles libres.</p></div>
+  <div class="card"><h4 style="color:var(--craie-dim)">📶 Hors‑ligne d'abord</h4><p>Fonctionne sans réseau (sauf M10).</p></div>
+  <div class="card"><h4 style="color:var(--vert)">🔌 Ouvert</h4><p>Extensible par plugins et outils externes.</p></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. ARCHITECTURE -->
+<h2 id="architecture">2. Architecture générale</h2>
+
+<div class="diagram-container">
+<svg viewBox="0 0 1000 1050" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <!-- Entrées -->
+  <rect x="40" y="20" width="280" height="140" rx="8" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="180" y="45" text-anchor="middle" fill="#DDD9CF" font-family="Barlow Condensed" font-size="18" font-weight="600">📥 ENTRÉES</text>
+  <text x="60" y="70" fill="#DDD9CF" font-size="11">PDF · TIFF · PNG · JPG</text>
+  <text x="60" y="88" fill="#DDD9CF" font-size="11">PLY · OBJ · STL (3D)</text>
+  <text x="60" y="106" fill="#DDD9CF" font-size="11">CSV · Excel · Saisie</text>
+  <text x="60" y="124" fill="#DDD9CF" font-size="11">API · Web scraping · RSS</text>
+  <text x="60" y="142" fill="#DDD9CF" font-size="11">Photo (recherche visuelle)</text>
+
+  <line x1="320" y1="90" x2="370" y2="90" stroke="#39404A" stroke-width="2"/>
+  <polygon points="365,85 375,90 365,95" fill="#39404A"/>
+
+  <!-- Socle -->
+  <rect x="380" y="20" width="280" height="140" rx="8" fill="#171A1F" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="520" y="45" text-anchor="middle" fill="#7BB0DE" font-family="Barlow Condensed" font-size="18" font-weight="600">🧱 SOCLE</text>
+  <text x="400" y="70" fill="#DDD9CF" font-size="11">catalogue · modele · planche · piece</text>
+  <text x="400" y="88" fill="#DDD9CF" font-size="11">nomenclature · applicabilite · cote</text>
+  <text x="400" y="106" fill="#DDD9CF" font-size="11">media · traduction</text>
+  <text x="400" y="135" fill="#8B9099" font-size="10">Ne dépend d'aucun module</text>
+
+  <line x1="520" y1="160" x2="520" y2="210" stroke="#39404A" stroke-width="2"/>
+  <polygon points="515,205 520,215 525,205" fill="#39404A"/>
+
+  <!-- Modules -->
+  <rect x="20" y="220" width="960" height="600" rx="8" fill="#21252C" stroke="#7BB0DE" stroke-width="2"/>
+  <text x="500" y="248" text-anchor="middle" fill="#7BB0DE" font-family="Barlow Condensed" font-size="18" font-weight="600">🔌 MODULES (M1 à M34)</text>
+
+  <!-- Ligne 1 -->
+  <rect x="40" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="75" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M1</text>
+  <text x="75" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Planches</text>
+
+  <rect x="120" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="155" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M2</text>
+  <text x="155" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Équivalences</text>
+
+  <rect x="200" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="235" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M3</text>
+  <text x="235" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Veille</text>
+
+  <rect x="280" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="315" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M4</text>
+  <text x="315" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Chantier</text>
+
+  <rect x="360" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="395" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M5</text>
+  <text x="395" y="294" text-anchor="middle" fill="#8B9099" font-size="7">3D</text>
+
+  <rect x="440" y="265" width="80" height="35" rx="6" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="480" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M6</text>
+  <text x="480" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Modération</text>
+
+  <rect x="530" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="565" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M7</text>
+  <text x="565" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Annuaire</text>
+
+  <rect x="610" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="645" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M8</text>
+  <text x="645" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Recherche IA</text>
+
+  <rect x="690" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="725" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M9</text>
+  <text x="725" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Panier</text>
+
+  <rect x="770" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="805" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M10</text>
+  <text x="805" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Collecteur</text>
+
+  <rect x="850" y="265" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="885" y="282" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M11</text>
+  <text x="885" y="294" text-anchor="middle" fill="#8B9099" font-size="7">Sauvegarde</text>
+
+  <!-- Ligne 2 -->
+  <rect x="40" y="310" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="75" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M12</text>
+  <text x="75" y="339" text-anchor="middle" fill="#8B9099" font-size="7">CAO</text>
+
+  <rect x="120" y="310" width="70" height="35" rx="6" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="155" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M13</text>
+  <text x="155" y="339" text-anchor="middle" fill="#8B9099" font-size="7">Versioning</text>
+
+  <rect x="200" y="310" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="235" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M14</text>
+  <text x="235" y="339" text-anchor="middle" fill="#8B9099" font-size="7">Historique</text>
+
+  <rect x="280" y="310" width="80" height="35" rx="6" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="320" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M15</text>
+  <text x="320" y="339" text-anchor="middle" fill="#8B9099" font-size="7">Import massif</text>
+
+  <rect x="370" y="310" width="80" height="35" rx="6" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="410" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M16</text>
+  <text x="410" y="339" text-anchor="middle" fill="#8B9099" font-size="7">Recherche visuelle</text>
+
+  <rect x="460" y="310" width="80" height="35" rx="6" fill="#2A2F38" stroke="#C2542A" stroke-width="2"/>
+  <text x="500" y="327" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M18</text>
+  <text x="500" y="339" text-anchor="middle" fill="#8B9099" font-size="7">Qualité données</text>
+
+  <!-- Ligne 3 -->
+  <rect x="40" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="75" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M19</text>
+  <text x="75" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Astuces</text>
+
+  <rect x="120" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="155" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M20</text>
+  <text x="155" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Correspondances</text>
+
+  <rect x="200" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="235" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M21</text>
+  <text x="235" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Ressources</text>
+
+  <rect x="280" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="315" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M22</text>
+  <text x="315" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Événements</text>
+
+  <rect x="360" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="395" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M23</text>
+  <text x="395" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Dépôt</text>
+
+  <rect x="440" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="475" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M24</text>
+  <text x="475" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Retours</text>
+
+  <rect x="520" y="355" width="70" height="35" rx="6" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="555" y="372" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M26</text>
+  <text x="555" y="384" text-anchor="middle" fill="#8B9099" font-size="7">Galerie</text>
+
+  <!-- Ligne 4 -->
+  <rect x="40" y="400" width="70" height="35" rx="6" fill="#2A2F38" stroke="#DB7093" stroke-width="2"/>
+  <text x="75" y="417" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M27</text>
+  <text x="75" y="429" text-anchor="middle" fill="#8B9099" font-size="7">CGU/RGPD</text>
+
+  <rect x="120" y="400" width="70" height="35" rx="6" fill="#2A2F38" stroke="#DB7093" stroke-width="2"/>
+  <text x="155" y="417" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M28</text>
+  <text x="155" y="429" text-anchor="middle" fill="#8B9099" font-size="7">Support</text>
+
+  <rect x="200" y="400" width="70" height="35" rx="6" fill="#2A2F38" stroke="#DB7093" stroke-width="2"/>
+  <text x="235" y="417" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M29</text>
+  <text x="235" y="429" text-anchor="middle" fill="#8B9099" font-size="7">Crédits</text>
+
+  <!-- Ligne 5 — Gestion de stock -->
+  <rect x="40" y="445" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="80" y="462" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M30</text>
+  <text x="80" y="474" text-anchor="middle" fill="#8B9099" font-size="7">Stock</text>
+
+  <rect x="130" y="445" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="170" y="462" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M31</text>
+  <text x="170" y="474" text-anchor="middle" fill="#8B9099" font-size="7">Alertes</text>
+
+  <rect x="220" y="445" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="260" y="462" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M32</text>
+  <text x="260" y="474" text-anchor="middle" fill="#8B9099" font-size="7">Scan QR</text>
+
+  <rect x="310" y="445" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="350" y="462" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M33</text>
+  <text x="350" y="474" text-anchor="middle" fill="#8B9099" font-size="7">Entrées/sorties</text>
+
+  <rect x="400" y="445" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="440" y="462" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M34</text>
+  <text x="440" y="474" text-anchor="middle" fill="#8B9099" font-size="7">Doublons</text>
+
+  <!-- Ligne 6 — Modules de stock (suite) -->
+  <rect x="40" y="490" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="80" y="507" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M35</text>
+  <text x="80" y="519" text-anchor="middle" fill="#8B9099" font-size="7">Inventaire</text>
+
+  <rect x="130" y="490" width="80" height="35" rx="6" fill="#2A2F38" stroke="#E67E22" stroke-width="2"/>
+  <text x="170" y="507" text-anchor="middle" fill="#DDD9CF" font-size="9" font-weight="600">M36</text>
+  <text x="170" y="519" text-anchor="middle" fill="#8B9099" font-size="7">Achats</text>
+
+  <line x1="500" y1="820" x2="500" y2="870" stroke="#39404A" stroke-width="2"/>
+  <polygon points="495,865 500,875 495,865" fill="#39404A"/>
+
+  <!-- Sorties -->
+  <rect x="40" y="880" width="920" height="120" rx="8" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="500" y="905" text-anchor="middle" fill="#C99A3E" font-family="Barlow Condensed" font-size="18" font-weight="600">📤 SORTIES</text>
+  <text x="60" y="930" fill="#DDD9CF" font-size="11">JSON · CSV · Excel · STL · STEP · FCStd · OBJ · PDF · QR code · Email · WhatsApp · Page web · G‑code · DXF</text>
+  <text x="60" y="950" fill="#DDD9CF" font-size="11">RSS · API REST · Webhooks · iCal · Markdown · XML · Notifications push · Bulletin</text>
+  <text x="60" y="975" fill="#8B9099" font-size="10">Les scans ne sont pas redistribués — seules les données factuelles et coordonnées le sont</text>
+</svg>
+</div>
+
+<h3 id="modules-liste">2.1 Liste des modules (M1 à M34)</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Module</th><th>Fonction</th><th>Statut</th></tr></thead>
+  <tbody>
+    <tr><td><strong>M1</strong></td><td>Planches cliquables</td><td><span class="badge vert">✔️</span></td></tr>
+    <tr><td><strong>M2</strong></td><td>Équivalences modernes</td><td><span class="badge vert">✔️</span></td></tr>
+    <tr><td><strong>M3</strong></td><td>Veille marché</td><td><span class="badge bleu">🔄</span></td></tr>
+    <tr><td><strong>M4</strong></td><td>Carnet de chantier</td><td><span class="badge bleu">🔄</span></td></tr>
+    <tr><td><strong>M5</strong></td><td>Reproduction 3D</td><td><span class="badge bleu">🔄</span></td></tr>
+    <tr><td><strong style="color:#7B68EE;">M6</strong></td><td style="color:#7B68EE;">Modération et contributions 🆕 (fusion M6+M25)</td><td><span class="badge violet">🆕</span></td></tr>
+    <tr><td><strong>M7</strong></td><td>Annuaire</td><td><span class="badge trait">📋</span></td></tr>
+    <tr><td><strong>M8</strong></td><td>Recherche IA</td><td><span class="badge trait">📋</span></td></tr>
+    <tr><td><strong>M9</strong></td><td>Panier et achats</td><td><span class="badge trait">📋</span></td></tr>
+    <tr><td><strong>M10</strong></td><td>Collecteur et veille</td><td><span class="badge ambre">⚠️</span></td></tr>
+    <tr><td><strong>M11</strong></td><td>Sauvegarde automatique</td><td><span class="badge trait">📋</span></td></tr>
+    <tr><td><strong>M12</strong></td><td>Intégration CAO</td><td><span class="badge ambre">⚠️</span></td></tr>
+    <tr><td><strong style="color:#C99A3E;">M13</strong></td><td style="color:#C99A3E;">Versioning des pièces 🆕 (fusion M13+M17)</td><td><span class="badge ambre">⚠️</span></td></tr>
+    <tr><td><strong>M14</strong></td><td>Historique (audit)</td><td><span class="badge trait">📋</span></td></tr>
+    <tr><td><strong style="color:#C99A3E;">M15</strong></td><td style="color:#C99A3E;">Import massif</td><td><span class="badge ambre">⚠️</span></td></tr>
+    <tr><td><strong style="color:#C99A3E;">M16</strong></td><td style="color:#C99A3E;">Recherche visuelle</td><td><span class="badge ambre">⚠️</span></td></tr>
+    <tr><td><strong style="color:#C2542A;">M18</strong></td><td style="color:#C2542A;">Qualité des données</td><td><span class="badge minium">🔴</span></td></tr>
+    <tr><td><strong style="color:#6E9E6C;">M19</strong></td><td style="color:#6E9E6C;">Astuces et techniques</td><td><span class="badge vert">🆕</span></td></tr>
+    <tr><td><strong style="color:#6E9E6C;">M20</strong></td><td style="color:#6E9E6C;">Correspondances et adaptations</td><td><span class="badge vert">🆕</span></td></tr>
+    <tr><td><strong style="color:#6E9E6C;">M21</strong></td><td style="color:#6E9E6C;">Ressources externes</td><td><span class="badge vert">🆕</span></td></tr>
+    <tr><td><strong style="color:#6E9E6C;">M22</strong></td><td style="color:#6E9E6C;">Événements et manifestations</td><td><span class="badge vert">🆕</span></td></tr>
+    <tr><td><strong style="color:#7B68EE;">M23</strong></td><td style="color:#7B68EE;">Dépôt de documents (participatif)</td><td><span class="badge violet">🆕</span></td></tr>
+    <tr><td><strong style="color:#7B68EE;">M24</strong></td><td style="color:#7B68EE;">Retours d'expérience — Carnet de restauration</td><td><span class="badge violet">🆕</span></td></tr>
+    <tr><td><strong style="color:#7B68EE;">M26</strong></td><td style="color:#7B68EE;">Galerie photo — Vitrine communautaire</td><td><span class="badge violet">🆕</span></td></tr>
+    <tr><td><strong style="color:#DB7093;">M27</strong></td><td style="color:#DB7093;">CGU et RGPD</td><td><span class="badge rose">🆕</span></td></tr>
+    <tr><td><strong style="color:#DB7093;">M28</strong></td><td style="color:#DB7093;">Support et reporting</td><td><span class="badge rose">🆕</span></td></tr>
+    <tr><td><strong style="color:#DB7093;">M29</strong></td><td style="color:#DB7093;">Crédits et licences</td><td><span class="badge rose">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M30</strong></td><td style="color:#E67E22;">Suivi des stocks et emplacements</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M31</strong></td><td style="color:#E67E22;">Alertes de seuil</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M32</strong></td><td style="color:#E67E22;">Scan QR code / code-barres</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M33</strong></td><td style="color:#E67E22;">Gestion des entrées/sorties</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M34</strong></td><td style="color:#E67E22;">Doublons et pièces en trop</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M35</strong></td><td style="color:#E67E22;">Inventaire et audit</td><td><span class="badge orange">🆕</span></td></tr>
+    <tr><td><strong style="color:#E67E22;">M36</strong></td><td style="color:#E67E22;">Suivi des achats et fournisseurs</td><td><span class="badge orange">🆕</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="socle">2.2 Le socle</h3>
+<div class="card">
+  <ul>
+    <li><code>catalogue</code> — un catalogue (ex: "Peugeot 203")</li>
+    <li><code>modele</code> — un modèle dans le catalogue</li>
+    <li><code>planche</code> — une planche (page) du catalogue</li>
+    <li><code>piece</code> — une pièce (référence, désignation)</li>
+    <li><code>nomenclature</code> — lien entre planche et pièce</li>
+    <li><code>applicabilite</code> — modèle/série/châssis</li>
+    <li><code>cote</code> — dimensions, filetages, couples</li>
+    <li><code>media</code> — scans, photos, meshes, STL, STEP</li>
+    <li><code>traduction</code> — textes traduits</li>
+  </ul>
+</div>
+
+<h3 id="flux">2.3 Flux de données</h3>
+<div class="diagram-container">
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <rect x="20" y="20" width="180" height="80" rx="8" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="110" y="50" text-anchor="middle" fill="#DDD9CF" font-size="14" font-weight="600">1. ACQUISITION</text>
+  <text x="110" y="72" text-anchor="middle" fill="#8B9099" font-size="11">PDF · Scan · CSV · API</text>
+
+  <line x1="200" y1="60" x2="250" y2="60" stroke="#39404A" stroke-width="2"/>
+  <polygon points="245,55 255,60 245,65" fill="#39404A"/>
+
+  <rect x="260" y="20" width="180" height="80" rx="8" fill="#21252C" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="350" y="50" text-anchor="middle" fill="#DDD9CF" font-size="14" font-weight="600">2. TRAITEMENT</text>
+  <text x="350" y="72" text-anchor="middle" fill="#8B9099" font-size="11">OCR · Normalisation · IA</text>
+
+  <line x1="440" y1="60" x2="490" y2="60" stroke="#39404A" stroke-width="2"/>
+  <polygon points="485,55 495,60 485,65" fill="#39404A"/>
+
+  <rect x="500" y="20" width="180" height="80" rx="8" fill="#171A1F" stroke="#7BB0DE" stroke-width="2"/>
+  <text x="590" y="50" text-anchor="middle" fill="#DDD9CF" font-size="14" font-weight="600">3. STOCKAGE</text>
+  <text x="590" y="72" text-anchor="middle" fill="#8B9099" font-size="11">SQL · Fichiers · Cache</text>
+
+  <line x1="680" y1="60" x2="730" y2="60" stroke="#39404A" stroke-width="2"/>
+  <polygon points="725,55 735,60 725,65" fill="#39404A"/>
+
+  <rect x="740" y="20" width="140" height="80" rx="8" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="810" y="50" text-anchor="middle" fill="#DDD9CF" font-size="14" font-weight="600">4. UTILISATION</text>
+  <text x="810" y="72" text-anchor="middle" fill="#8B9099" font-size="11">Vue · Recherche · Achat</text>
+
+  <line x1="110" y1="100" x2="110" y2="140" stroke="#39404A" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="350" y1="100" x2="350" y2="140" stroke="#39404A" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="590" y1="100" x2="590" y2="140" stroke="#39404A" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="810" y1="100" x2="810" y2="140" stroke="#39404A" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <rect x="260" y="150" width="520" height="50" rx="8" fill="#21252C" stroke="#4C7BA8" stroke-width="1.5"/>
+  <text x="520" y="172" text-anchor="middle" fill="#7BB0DE" font-size="12">🔄 Boucle d'information : les données utilisées enrichissent la base</text>
+  <text x="520" y="190" text-anchor="middle" fill="#8B9099" font-size="10">(mesures, astuces, collectes M10, modifications, retours communautaires, mouvements de stock)</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. INTERFACE UTILISATEUR — LE HUB -->
+<h2 id="hub">3. Interface utilisateur — Le Hub</h2>
+
+<p><strong>Principe :</strong> L'application n'est pas un monolithe. C'est un <strong>hub</strong> qui donne accès à des modules indépendants, tous connectés à la même base de données.</p>
+
+<div class="card success">
+  <h4 style="color:var(--vert);margin:0 0 8px">💡 Pourquoi un hub ?</h4>
+  <ul>
+    <li><strong>On n'utilise pas tout en même temps</strong> — le bricoleur n'a pas besoin du stock quand il cherche une pièce, ni du chantier quand il fait l'inventaire</li>
+    <li><strong>Chaque module est une application autonome</strong> — elle peut être ouverte séparément, voire lancée depuis une autre interface</li>
+    <li><strong>La base est partagée</strong> — toutes les applis lisent et écrivent dans le même <code>atelier.db</code></li>
+    <li><strong>On choisit ce qu'on active</strong> — les modules inutiles peuvent être désactivés pour ne pas encombrer</li>
+  </ul>
+</div>
+
+<div class="diagram-container">
+<svg viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <rect x="20" y="20" width="760" height="610" rx="12" fill="#171A1F" stroke="#39404A" stroke-width="2"/>
+  <text x="400" y="55" text-anchor="middle" fill="#7BB0DE" font-family="Barlow Condensed" font-size="20" font-weight="600">🏠 Accueil — Hub de l'atelier</text>
+
+  <rect x="50" y="80" width="320" height="140" rx="10" fill="#21252C" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="210" y="115" text-anchor="middle" fill="#7BB0DE" font-family="Barlow Condensed" font-size="18" font-weight="600">📋 Catalogue</text>
+  <text x="70" y="140" fill="#DDD9CF" font-size="12">• Planches cliquables (M1)</text>
+  <text x="70" y="160" fill="#DDD9CF" font-size="12">• Fiche pièce avec cotes</text>
+  <text x="70" y="180" fill="#DDD9CF" font-size="12">• Équivalences modernes (M2)</text>
+  <text x="70" y="200" fill="#DDD9CF" font-size="12">• Astuces et techniques (M19)</text>
+
+  <rect x="430" y="80" width="320" height="140" rx="10" fill="#21252C" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="590" y="115" text-anchor="middle" fill="#6E9E6C" font-family="Barlow Condensed" font-size="18" font-weight="600">🔧 Chantier</text>
+  <text x="450" y="140" fill="#DDD9CF" font-size="12">• Carnet de chantier (M4)</text>
+  <text x="450" y="160" fill="#DDD9CF" font-size="12">• Pièces manquantes</text>
+  <text x="450" y="180" fill="#DDD9CF" font-size="12">• Liste d'achat (M9)</text>
+  <text x="450" y="200" fill="#DDD9CF" font-size="12">• Mesures relevées</text>
+
+  <rect x="50" y="240" width="320" height="140" rx="10" fill="#21252C" stroke="#E67E22" stroke-width="2"/>
+  <text x="210" y="275" text-anchor="middle" fill="#E67E22" font-family="Barlow Condensed" font-size="18" font-weight="600">📦 Stock</text>
+  <text x="70" y="300" fill="#DDD9CF" font-size="12">• Gestion des stocks (M30)</text>
+  <text x="70" y="320" fill="#DDD9CF" font-size="12">• Alertes de seuil (M31)</text>
+  <text x="70" y="340" fill="#DDD9CF" font-size="12">• Scan QR / code-barres (M32)</text>
+  <text x="70" y="360" fill="#DDD9CF" font-size="12">• Inventaire et achats (M35, M36)</text>
+
+  <rect x="430" y="240" width="320" height="140" rx="10" fill="#21252C" stroke="#7B68EE" stroke-width="2"/>
+  <text x="590" y="275" text-anchor="middle" fill="#7B68EE" font-family="Barlow Condensed" font-size="18" font-weight="600">👥 Communauté</text>
+  <text x="450" y="300" fill="#DDD9CF" font-size="12">• Carnets de restauration (M24)</text>
+  <text x="450" y="320" fill="#DDD9CF" font-size="12">• Galerie / vitrine (M26)</text>
+  <text x="450" y="340" fill="#DDD9CF" font-size="12">• Dépôt de documents (M23)</text>
+  <text x="450" y="360" fill="#DDD9CF" font-size="12">• Événements / bourses (M22)</text>
+
+  <rect x="50" y="400" width="320" height="100" rx="10" fill="#21252C" stroke="#C99A3E" stroke-width="2"/>
+  <text x="210" y="435" text-anchor="middle" fill="#C99A3E" font-family="Barlow Condensed" font-size="18" font-weight="600">🔍 Recherche IA</text>
+  <text x="70" y="460" fill="#DDD9CF" font-size="12">• Recherche par photo (M16)</text>
+  <text x="70" y="480" fill="#DDD9CF" font-size="12">• Recherche sémantique (M8)</text>
+
+  <rect x="430" y="400" width="320" height="100" rx="10" fill="#21252C" stroke="#DB7093" stroke-width="2"/>
+  <text x="590" y="435" text-anchor="middle" fill="#DB7093" font-family="Barlow Condensed" font-size="18" font-weight="600">⚙️ Réglages</text>
+  <text x="450" y="460" fill="#DDD9CF" font-size="12">• Langue (i18n) · Modules actifs</text>
+  <text x="450" y="480" fill="#DDD9CF" font-size="12">• Sauvegarde (M11) · CGU / RGPD (M27)</text>
+
+  <text x="400" y="565" text-anchor="middle" fill="#8B9099" font-size="11">Toutes les tuiles partagent la même base de données <code>atelier.db</code></text>
+  <text x="400" y="585" text-anchor="middle" fill="#8B9099" font-size="11">Chaque module peut être activé ou désactivé dans les réglages</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. ENTRÉES / SORTIES -->
+<h2 id="entrees-sorties">4. Entrées et sorties</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4 style="color:var(--vert)">📥 Entrées</h4>
+    <ul>
+      <li>PDF · TIFF · PNG · JPG (scans)</li>
+      <li>PLY · OBJ · STL (scans 3D)</li>
+      <li>CSV · Excel (nomenclatures)</li>
+      <li>Saisie manuelle (cotes, observations)</li>
+      <li>API externes (fournisseurs, clubs)</li>
+      <li>Web scraping (M10)</li>
+      <li>Photo (recherche visuelle — M16)</li>
+      <li>Fichiers audio (notes vocales)</li>
+      <li>JSON · YAML (configuration)</li>
+      <li>Flux RSS</li>
+      <li>Webhooks</li>
+      <li>Liens profonds</li>
+      <li>Documents déposés (M23)</li>
+      <li>Retours d'expérience (M24)</li>
+      <li><strong>Scan QR code / code-barres (M32)</strong></li>
+      <li><strong>Entrées de stock (M33)</strong></li>
+      <li><strong>Factures et bons de livraison (M36)</strong></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4 style="color:var(--ambre)">📤 Sorties</h4>
+    <ul>
+      <li>JSON · CSV · Excel</li>
+      <li>STL · STEP · FCStd · OBJ</li>
+      <li>PDF (devis, fiches, astuces, catalogues)</li>
+      <li>QR code (étiquettes)</li>
+      <li>Email · WhatsApp (partage)</li>
+      <li>Page web (HTML, partage public)</li>
+      <li>G-code · DXF</li>
+      <li>RSS Feed</li>
+      <li>API REST</li>
+      <li>Webhooks</li>
+      <li>iCal (événements)</li>
+      <li>Markdown (documentation)</li>
+      <li>XML (interopérabilité)</li>
+      <li>Notifications push</li>
+      <li>Bulletin d'information</li>
+      <li><strong>Rapport d'inventaire (M35)</strong></li>
+      <li><strong>Alertes de seuil (M31)</strong></li>
+      <li><strong>Liste de pièces en trop (M34)</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. CAS D'USAGE : PIÈCE SANS RÉFÉRENCE -->
+<h2 id="workflow">5. Cas d'usage : pièce sans référence</h2>
+
+<p>L'utilisateur peut rencontrer une pièce qui n'a pas de référence connue dans le catalogue. Le workflow suivant est prévu :</p>
+
+<div class="diagram-container">
+<svg viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <rect x="20" y="20" width="860" height="410" rx="8" fill="#21252C" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="450" y="50" text-anchor="middle" fill="#7BB0DE" font-family="Barlow Condensed" font-size="18" font-weight="600">📸 Pièce sans référence — Workflow</text>
+
+  <rect x="60" y="70" width="140" height="50" rx="8" fill="#2A2F38" stroke="#6E9E6C" stroke-width="2"/>
+  <text x="130" y="92" text-anchor="middle" fill="#DDD9CF" font-size="11" font-weight="600">📷 Photo</text>
+  <text x="130" y="108" text-anchor="middle" fill="#8B9099" font-size="9">Appareil photo</text>
+
+  <line x1="200" y1="95" x2="240" y2="95" stroke="#39404A" stroke-width="2"/>
+  <polygon points="235,90 245,95 235,100" fill="#39404A"/>
+
+  <rect x="250" y="70" width="140" height="50" rx="8" fill="#2A2F38" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="320" y="92" text-anchor="middle" fill="#DDD9CF" font-size="11" font-weight="600">🔍 M16 · IA</text>
+  <text x="320" y="108" text-anchor="middle" fill="#8B9099" font-size="9">Reconnaissance</text>
+
+  <line x1="390" y1="95" x2="430" y2="95" stroke="#39404A" stroke-width="2"/>
+  <polygon points="425,90 435,95 425,100" fill="#39404A"/>
+
+  <rect x="440" y="60" width="160" height="70" rx="8" fill="#2A2F38" stroke="#C99A3E" stroke-width="2"/>
+  <text x="520" y="82" text-anchor="middle" fill="#DDD9CF" font-size="11" font-weight="600">❌ Pas de correspondance</text>
+  <text x="520" y="100" text-anchor="middle" fill="#8B9099" font-size="9">L'IA ne trouve rien</text>
+  <text x="520" y="115" text-anchor="middle" fill="#8B9099" font-size="9">dans la base</text>
+
+  <line x1="520" y1="130" x2="520" y2="165" stroke="#39404A" stroke-width="2"/>
+  <polygon points="515,160 525,165 515,170" fill="#39404A"/>
+
+  <rect x="290" y="175" width="460" height="55" rx="8" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="520" y="195" text-anchor="middle" fill="#DDD9CF" font-size="11" font-weight="600">📝 M23 + M24 · Formulaire de saisie</text>
+  <text x="520" y="215" text-anchor="middle" fill="#8B9099" font-size="9">L'utilisateur remplit : référence, désignation, cotes, matière, photos, observations</text>
+
+  <line x1="520" y1="230" x2="520" y2="265" stroke="#39404A" stroke-width="2"/>
+  <polygon points="515,260 525,265 515,270" fill="#39404A"/>
+
+  <rect x="290" y="275" width="460" height="55" rx="8" fill="#2A2F38" stroke="#7B68EE" stroke-width="2"/>
+  <text x="520" y="295" text-anchor="middle" fill="#DDD9CF" font-size="11" font-weight="600">✅ M6 · Modération</text>
+  <text x="520" y="315" text-anchor="middle" fill="#8B9099" font-size="9">Un modérateur ou la communauté valide les informations saisies</text>
+
+  <line x1="520" y1="330" x2="520" y2="365" stroke="#39404A" stroke-width="2"/>
+  <polygon points="515,360 525,365 515,370" fill="#39404A"/>
+
+  <rect x="380" y="375" width="280" height="40" rx="8" fill="#171A1F" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="520" y="395" text-anchor="middle" fill="#7BB0DE" font-size="11">💾 Intégration dans le socle (piece, cote, media)</text>
+</svg>
+</div>
+
+<div class="card">
+  <h4 style="color:var(--bleu-vif)">Modules impliqués dans ce workflow</h4>
+  <ul>
+    <li><strong>M16</strong> — Recherche visuelle</li>
+    <li><strong>M23</strong> — Dépôt de documents</li>
+    <li><strong>M24</strong> — Retours d'expérience</li>
+    <li><strong>M6</strong> — Modération (validation des contributions)</li>
+    <li><strong>Socle</strong> — Intégration dans `piece`, `cote`, `media`</li>
+    <li><strong>M29</strong> — Crédits et licences</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. DÉTAIL DES MODULES (M1 à M34) -->
+<h2 id="modules-detail">6. Détail des modules (M1 à M34)</h2>
+
+<div class="grid">
+  <div class="card"><h4>M1 · Planches cliquables</h4><p><code>m1_zone</code> — zones actives sur les planches scannées</p></div>
+  <div class="card"><h4>M2 · Équivalences modernes</h4><p><code>m2_equivalence</code> — normalisé, refab, adaptation</p></div>
+  <div class="card"><h4>M3 · Veille marché</h4><p><code>m3_annonce</code> — surveillance des annonces</p></div>
+  <div class="card"><h4>M4 · Carnet de chantier</h4><p><code>m4_ligne</code> — suivi des pièces sur le véhicule</p></div>
+  <div class="card"><h4>M5 · Reproduction 3D</h4><p><code>m5_modele</code> — scan → mesh → CAO → STL</p></div>
+  <div class="card"><h4 style="color:#7B68EE">M6 · Modération et contributions 🆕</h4><p>Validation des propositions (M23, M24) et des modifications (M20, M19). Fusion M6 + M25.</p></div>
+  <div class="card"><h4>M7 · Annuaire</h4><p><code>m7_ressource</code> — fournisseurs, clubs, artisans</p></div>
+  <div class="card"><h4>M8 · Recherche IA</h4><p><code>m8_index</code> — recherche sémantique (FTS5)</p></div>
+  <div class="card"><h4>M9 · Panier et achats</h4><p><code>m9_panier</code> — devis, commandes, partage</p></div>
+  <div class="card"><h4>M10 · Collecteur et veille</h4><p><code>m10_source</code> — pompage automatique de sources</p></div>
+  <div class="card"><h4>M11 · Sauvegarde</h4><p><code>m11_sauvegarde</code> — export planifié</p></div>
+  <div class="card"><h4>M12 · Intégration CAO</h4><p><code>m12_integration</code> — lancement externe</p></div>
+  <div class="card"><h4 style="color:#C99A3E">M13 · Versioning des pièces 🆕</h4><p>Fusion M13 + M17 — suivi des versions des pièces (cote, matière, refabrication).</p></div>
+  <div class="card"><h4>M14 · Historique</h4><p><code>m14_audit</code> — traçabilité des modifications</p></div>
+</div>
+
+<h3 style="color:var(--ambre)">6.1 M15 · Import massif ⚠️ PRIORITAIRE</h3>
+<div class="warning">
+  <p><strong>Problème :</strong> L'utilisateur doit pointer chaque planche manuellement.</p>
+  <p><strong>Solution :</strong> Importer automatiquement tous les PDF et scans d'un dossier.</p>
+</div>
+
+<h3 style="color:var(--ambre)">6.2 M16 · Recherche visuelle ⚠️ PRIORITAIRE</h3>
+<div class="warning">
+  <p><strong>Problème :</strong> Impossible de rechercher une pièce par photo.</p>
+  <p><strong>Solution :</strong> Reconnaissance d'image (TensorFlow, CLIP, ou API externe).</p>
+</div>
+
+<h3 style="color:var(--minium)">6.3 M18 · Qualité des données 🔴 CRITIQUE</h3>
+<div class="error">
+  <p><strong>Problème :</strong> Les données issues du scraping sont de qualité variable.</p>
+  <p><strong>Solution :</strong> Système de confiance (score), validation manuelle (M6).</p>
+</div>
+
+<!-- MODULES UTILISATEURS -->
+<h3 style="color:var(--vert)">6.4 M19 · Astuces et techniques</h3>
+<div class="card" style="border-color:var(--vert)">
+  <p><strong>Rôle :</strong> Stocker et partager des astuces de réparation, méthodes, techniques spécifiques.</p>
+</div>
+
+<h3 style="color:var(--vert)">6.5 M20 · Correspondances et adaptations</h3>
+<div class="card" style="border-color:var(--vert)">
+  <p><strong>Rôle :</strong> Gérer les correspondances de pièces entre modèles et les adaptations nécessaires.</p>
+</div>
+
+<h3 style="color:var(--vert)">6.6 M21 · Ressources externes</h3>
+<div class="card" style="border-color:var(--vert)">
+  <p><strong>Rôle :</strong> Lier des ressources externes (forums, vidéos, manuels PDF, magasins).</p>
+  <p><strong>Lien :</strong> M21 ↔ M7 (les ressources peuvent être des fournisseurs).</p>
+</div>
+
+<h3 style="color:var(--vert)">6.7 M22 · Événements et manifestations</h3>
+<div class="card" style="border-color:var(--vert)">
+  <p><strong>Rôle :</strong> Répertorier les événements liés aux véhicules anciens : bourses, festivals, rassemblements.</p>
+  <p><strong>Lien :</strong> M34 (doublons) peut créer une entrée dans M22 (« À vendre à la bourse »).</p>
+</div>
+
+<!-- MODULES COMMUNAUTAIRES -->
+<h3 style="color:#7B68EE">6.8 M23 · Dépôt de documents (participatif)</h3>
+<div class="card" style="border-color:#7B68EE">
+  <p><strong>Rôle :</strong> Les utilisateurs peuvent verser des documents (PDF, photos, modèles 3D) avec licence et attribution.</p>
+</div>
+
+<h3 style="color:#7B68EE">6.9 M24 · Retours d'expérience — Carnet de restauration</h3>
+<div class="card" style="border-color:#7B68EE">
+  <p><strong>Rôle :</strong> C'est le <strong>carnet de restauration</strong>. Un utilisateur ouvre un fil (ex: « Ma 203 C de 1956 »), y met du texte, des photos, reçoit des commentaires et des likes.</p>
+  <p><strong>Tables :</strong> <code>m24_retour</code>, <code>m24_commentaire</code></p>
+  <p><strong>Lien :</strong> M24 peut avoir une galerie de photos (M26) intégrée.</p>
+</div>
+
+<h3 style="color:#7B68EE">6.10 M26 · Galerie photo — Vitrine communautaire</h3>
+<div class="card" style="border-color:#7B68EE">
+  <p><strong>Rôle :</strong> C'est la <strong>vitrine</strong>. Une photo d'une pièce rare, d'une sortie club, d'une bourse. Pas de gros texte, juste une image avec un titre et des tags.</p>
+  <p><strong>Table :</strong> <code>m26_galerie</code></p>
+  <p><strong>Lien :</strong> M24 → M26 (les retours peuvent avoir des photos). M22 → M26 (les événements peuvent avoir des photos).</p>
+</div>
+
+<!-- MODULES JURIDIQUES -->
+<h3 style="color:#DB7093">6.11 M27 · CGU et RGPD</h3>
+<div class="card" style="border-color:#DB7093">
+  <p><strong>Rôle :</strong> Conditions générales d'utilisation et conformité RGPD.</p>
+</div>
+
+<h3 style="color:#DB7093">6.12 M28 · Support et reporting</h3>
+<div class="card" style="border-color:#DB7093">
+  <p><strong>Rôle :</strong> Système de signalement (reporting) et support par email.</p>
+</div>
+
+<h3 style="color:#DB7093">6.13 M29 · Crédits et licences</h3>
+<div class="card" style="border-color:#DB7093">
+  <p><strong>Rôle :</strong> Système de crédits pour les contributeurs, avec gestion des licences (Common License, CC-BY, etc.).</p>
+  <div class="code-block">
+CREATE TABLE m29_licence (
+  id INTEGER PRIMARY KEY,
+  code TEXT NOT NULL UNIQUE,
+  nom TEXT NOT NULL,
+  description TEXT,
+  url TEXT
+);
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. GESTION DE STOCK -->
+<h2 id="stock">7. Gestion de stock — Modules M30 à M36</h2>
+
+<p>Ces modules répondent aux besoins quotidiens du bricoleur collectionneur : savoir ce qu'il a, où il l'a rangé, et quand il va en manquer.</p>
+
+<div class="grid">
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">📦 M30 · Suivi des stocks et emplacements</h4>
+    <p><strong>Rôle :</strong> Savoir combien de pièces on a et où elles sont rangées.</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">🔔 M31 · Alertes de seuil</h4>
+    <p><strong>Rôle :</strong> Être alerté quand une pièce est en dessous ou au-dessus d'un seuil.</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">📱 M32 · Scan QR code / code-barres</h4>
+    <p><strong>Rôle :</strong> Scanner une étiquette sur une caisse pour afficher son contenu instantanément.</p>
+    <p><strong>Lien :</strong> M32 → M30 + M33 (le scan met à jour le stock).</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">🔄 M33 · Entrées et sorties de stock</h4>
+    <p><strong>Rôle :</strong> Enregistrer quand une pièce entre ou sort du stock.</p>
+    <p><strong>Lien :</strong> M4 → M33 (une pièce posée sur le véhicule déclenche une sortie de stock).</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">🔄 M34 · Doublons et pièces en trop</h4>
+    <p><strong>Rôle :</strong> Détecter les doublons et proposer une action.</p>
+    <p><strong>Lien :</strong> M34 → M22 (un doublon peut être ajouté à une bourse).</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">📊 M35 · Inventaire et audit</h4>
+    <p><strong>Rôle :</strong> Faire un inventaire physique et comparer avec les données théoriques.</p>
+    <p><strong>Lien :</strong> M35 → M11 (les rapports d'inventaire sont sauvegardés).</p>
+  </div>
+
+  <div class="card" style="border-color:#E67E22">
+    <h4 style="color:#E67E22">🧾 M36 · Suivi des achats et fournisseurs</h4>
+    <p><strong>Rôle :</strong> Savoir où, quand et à quel prix on a acheté chaque pièce.</p>
+    <p><strong>Lien :</strong> M36 ↔ M7 (un achat est lié à un fournisseur). M3 ↔ M36 (les annonces peuvent être liées à des achats).</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. FLUX D'IMPORT ET D'EXPORT -->
+<h2 id="flux-import-export">8. Flux d'import et d'export</h2>
+
+<h3>8.1 Flux d'import — Comment les données entrent</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Origine</th><th>Format</th><th>Module(s)</th><th>Cheminement</th></tr></thead>
+  <tbody>
+    <tr><td>Catalogue papier</td><td>Scan (TIFF, PNG, JPG)</td><td>M1, M15, M10</td><td>Scan → OCR (M15) → Reconnaissance des repères (M1) → Création des zones cliquables</td></tr>
+    <tr><td>PDF catalogue</td><td>PDF</td><td>M15, M10</td><td>Extraction du texte (M15) → Détection des pages de nomenclature → Import dans `piece` et `nomenclature`</td></tr>
+    <tr><td>Nomenclature externe</td><td>CSV, Excel</td><td>M1, M2</td><td>Import direct → Création/mise à jour des pièces</td></tr>
+    <tr><td>Scan 3D</td><td>PLY, OBJ, STL</td><td>M5</td><td>Import → Nettoyage mesh → Retopologie → CAO paramétrique → Stockage</td></tr>
+    <tr><td>Photo de pièce</td><td>JPG, PNG</td><td>M16, M8</td><td>Upload → IA de reconnaissance → Si trouvée, lien vers `piece` → Si non, ouvre M23 + M24</td></tr>
+    <tr><td>Saisie manuelle</td><td>Texte</td><td>Socle, M4, M19, M20, M21, M22, M23, M24</td><td>Remplissage de formulaires → Création/mise à jour</td></tr>
+    <tr><td>API externe</td><td>JSON, XML</td><td>M3, M7, M10</td><td>Interrogation → Réception → Normalisation → Stockage</td></tr>
+    <tr><td>Web scraping</td><td>HTML</td><td>M10</td><td>Parsing → Extraction → Stockage dans `m10_resultat` → Correspondance avec `piece`</td></tr>
+    <tr><td>QR code / code-barres</td><td>Scan</td><td>M32</td><td>Lecture → Recherche de la pièce → Mise à jour du stock (M30, M33)</td></tr>
+    <tr><td>Facture / bon de livraison</td><td>PDF, image</td><td>M36</td><td>Upload → Lien avec un achat (M36) et une pièce</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>8.2 Flux d'export — Comment les données sortent</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Destination</th><th>Format</th><th>Module(s)</th><th>Cheminement</th></tr></thead>
+  <tbody>
+    <tr><td>Application web</td><td>HTML, JSON</td><td>M1, M2, M19, M20, M21, M22</td><td>Affichage des planches cliquables → API JSON → Rendu HTML</td></tr>
+    <tr><td>Nomenclature</td><td>CSV, Excel</td><td>M1, M2, M4</td><td>Export des données de la base → Fichier téléchargeable</td></tr>
+    <tr><td>Modèle 3D</td><td>STL, STEP, FCStd, OBJ</td><td>M5</td><td>Export depuis `m5_modele` → Fichier téléchargeable</td></tr>
+    <tr><td>Plan d'usinage</td><td>PDF</td><td>M5</td><td>Génération → Fichier téléchargeable</td></tr>
+    <tr><td>QR code</td><td>PNG, PDF</td><td>M1, M4</td><td>Génération depuis une pièce, un emplacement de stock, ou un sachet</td></tr>
+    <tr><td>Devis</td><td>PDF, email</td><td>M9</td><td>Calcul du panier → Génération du PDF → Envoi par email</td></tr>
+    <tr><td>Liste de courses</td><td>PDF, texte</td><td>M9</td><td>Export de la liste des pièces à acheter → Impression ou partage</td></tr>
+    <tr><td>Partage communautaire</td><td>WhatsApp, email, lien</td><td>M9, M7, M23, M24, M26</td><td>Partage d'une fiche pièce, d'un retour d'expérience, d'une photo</td></tr>
+    <tr><td>API REST</td><td>JSON</td><td>Tous</td><td>Expose les données de la base à d'autres applications</td></tr>
+    <tr><td>RSS Feed</td><td>XML</td><td>M10, M22</td><td>Génération d'un flux des dernières annonces, événements, ou nouveaux documents</td></tr>
+    <tr><td>iCal</td><td>ICS</td><td>M22</td><td>Export des événements → Calendrier</td></tr>
+    <tr><td>Rapport d'inventaire</td><td>PDF, CSV</td><td>M35</td><td>Comparaison théorique/réel → Export</td></tr>
+    <tr><td>Liste de doublons</td><td>CSV</td><td>M34</td><td>Export des pièces en double → Vente / échange</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. JURIDIQUE -->
+<h2 id="juridique">9. Aspects juridiques</h2>
+<div class="card">
+  <ul>
+    <li><strong>Code source</strong> : MIT ou GPL — libre</li>
+    <li><strong>Données factuelles</strong> : Public Domain / CC0</li>
+    <li><strong>Scans du catalogue</strong> : USAGE PRIVÉ — ne pas redistribuer</li>
+    <li><strong>Modèles 3D</strong> : licence choisie par l'auteur (gérée via M29)</li>
+    <li><strong>Astuces et contenus partagés</strong> : CC-BY-SA</li>
+    <li><strong>Documents déposés (M23)</strong> : licence choisie par le déposant</li>
+    <li><strong>Photos de la galerie (M26)</strong> : licence choisie par l'auteur</li>
+    <li><strong>CGU et RGPD (M27)</strong> : consentement explicite des utilisateurs</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. AUDIT -->
+<h2 id="audit">10. Audit — Points critiques</h2>
+
+<div class="warning">
+  <h4 style="color:var(--ambre);margin:0 0 8px">⚠️ 6 POINTS CRITIQUES IDENTIFIÉS</h4>
+</div>
+
+<div class="grid">
+  <div class="card" style="border-color:var(--ambre)"><h4 style="color:var(--ambre)">1. Pas d'import massif</h4><p><strong>Action :</strong> M15</p></div>
+  <div class="card" style="border-color:var(--ambre)"><h4 style="color:var(--ambre)">2. Recherche visuelle</h4><p><strong>Action :</strong> M16</p></div>
+  <div class="card" style="border-color:var(--ambre)"><h4 style="color:var(--ambre)">3. Intégration CAO</h4><p><strong>Action :</strong> M12</p></div>
+  <div class="card" style="border-color:var(--ambre)"><h4 style="color:var(--ambre)">4. Versioning pièces</h4><p><strong>Action :</strong> M13 (fusionné)</p></div>
+  <div class="card" style="border-color:var(--ambre)"><h4 style="color:var(--ambre)">5. Dépendance internet M10</h4><p><strong>Action :</strong> Cache + synchronisation différée</p></div>
+  <div class="card" style="border-color:var(--minium)"><h4 style="color:var(--minium)">6. Qualité des données</h4><p><strong>Action :</strong> M18</p></div>
+</div>
+
+<h3>10.1 Recommandations</h3>
+<div class="note">
+  <ul>
+    <li><strong>Développer M15 (import massif) en priorité absolue</strong></li>
+    <li><strong>Mettre en place M11 (sauvegarde automatique)</strong> dès le début</li>
+    <li><strong>Valider les données collectées</strong> avec un niveau de confiance (M18) et validation par M6</li>
+    <li><strong>Privilégier les formats ouverts</strong> pour les modèles 3D (STEP, FCStd)</li>
+    <li><strong>Documenter les sources</strong> dans M7 (annuaire) et M21 (ressources)</li>
+    <li><strong>Encourager le partage d'astuces</strong> via M19</li>
+    <li><strong>Utiliser M22</strong> pour suivre les événements et bourses</li>
+    <li><strong>Mettre en place M27 (CGU/RGPD)</strong> dès la première version publique</li>
+    <li><strong>Utiliser M29</strong> pour gérer les crédits et licences dès le début</li>
+    <li><strong>Commencer la gestion de stock (M30-M36)</strong> dès que les premières pièces sont cataloguées</li>
+  </ul>
+</div>
+
+<h3>10.2 Risques et mitigation</h3>
+<div class="grid">
+  <div class="card error"><h4 style="color:var(--minium)">❌ Perte de données</h4><p><strong>Mitigation :</strong> M11 sauvegarde automatique</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Scans partagés</h4><p><strong>Mitigation :</strong> Licence claire</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Obsolescence formats 3D</h4><p><strong>Mitigation :</strong> Formats ouverts (STEP, FCStd)</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Faux positifs en collecte</h4><p><strong>Mitigation :</strong> M18 + M6 (validation)</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Astuces non vérifiées</h4><p><strong>Mitigation :</strong> Validation communautaire (M6)</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Événements obsolètes</h4><p><strong>Mitigation :</strong> M22 avec dates et vérification</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Contenus inappropriés</h4><p><strong>Mitigation :</strong> M6 — modération</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Non-respect RGPD</h4><p><strong>Mitigation :</strong> M27 — consentement explicite</p></div>
+  <div class="card error"><h4 style="color:var(--minium)">❌ Stock erroné</h4><p><strong>Mitigation :</strong> M35 — inventaire régulier</p></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 11. GUIDE -->
+<h2 id="guide">11. Guide d'utilisation</h2>
+<div class="grid">
+  <div class="card"><h4 style="color:var(--bleu-vif)">📦 Installation</h4><p><code>sqlite3 atelier.db &lt; socle-203.sql</code><br><code>python3 server.py</code></p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">📥 Importer</h4><p><code>python3 m1_import.py planche_30.json 30</code><br>ou M15 pour l'import massif</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">🎯 Pointer</h4><p>Ouvrir <code>reperes-203.html</code> dans Chrome</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">🖨️ Imprimer en 3D</h4><p>Exporter en STL → slicer → impression</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">💡 Astuces</h4><p>Partager et consulter les astuces via M19</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">📅 Événements</h4><p>Consulter les bourses et festivals via M22</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">📤 Partager</h4><p>Exporter en JSON, CSV, STL, STEP, PDF, QR</p></div>
+  <div class="card"><h4 style="color:var(--bleu-vif)">👥 Communauté</h4><p>Déposer des documents (M23), partager vos retours (M24), exposé dans la galerie (M26)</p></div>
+  <div class="card"><h4 style="color:#E67E22">📦 Gérer son stock</h4><p>Suivre ses pièces (M30), scanner les QR (M32), faire l'inventaire (M35)</p></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 12. ANNEXES -->
+<h2 id="annexes">12. Annexes</h2>
+
+<div class="card">
+  <h4 style="color:var(--bleu-vif)">📋 Standard minimal des catalogues</h4>
+  <table>
+    <thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+    <tbody>
+      <tr><td><code>reference</code></td><td>Identifiant de la pièce</td><td>0601.39</td></tr>
+      <tr><td><code>designation</code></td><td>Nom / description</td><td>BIELLE avec douille</td></tr>
+      <tr><td><code>quantite</code></td><td>Nombre par véhicule</td><td>1</td></tr>
+      <tr><td><code>planche</code></td><td>Numéro de la planche</td><td>12</td></tr>
+      <tr><td><code>repere</code></td><td>Numéro du repère</td><td>4</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h4 style="color:var(--bleu-vif)">📋 Sources identifiées (M10)</h4>
+  <table>
+    <thead><tr><th>Source</th><th>URL</th><th>Statut</th></tr></thead>
+    <tbody>
+      <tr><td>ServiceBox Classic</td><td>public.servicebox.peugeot.com/classic/</td><td>Accessible</td></tr>
+      <tr><td>NicosFly</td><td>203.nicosfly.net</td><td>✅ Libre</td></tr>
+      <tr><td>Der Franzose</td><td>franzose.de</td><td>✅ Libre</td></tr>
+      <tr><td>CIPERE</td><td>cipere.fr</td><td>✅ Libre</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h4 style="color:var(--bleu-vif)">📋 Licences supportées (M29)</h4>
+  <table>
+    <thead><tr><th>Code</th><th>Nom</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>CC0</code></td><td>Public Domain</td><td>Domaine public, aucune restriction</td></tr>
+      <tr><td><code>CC-BY</code></td><td>Attribution</td><td>Libre avec mention de l'auteur</td></tr>
+      <tr><td><code>CC-BY-SA</code></td><td>Attribution + Partage</td><td>Libre avec mention + partage dans les mêmes conditions</td></tr>
+      <tr><td><code>MIT</code></td><td>MIT</td><td>Code source libre</td></tr>
+      <tr><td><code>GPL</code></td><td>GNU GPL</td><td>Code source libre avec copyleft</td></tr>
+      <tr><td><code>CC-BY-NC</code></td><td>Non commercial</td><td>Libre pour usage non commercial</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h4 style="color:var(--bleu-vif)">📋 Feuille de route</h4>
+  <ol>
+    <li><strong>Phase 1-2</strong> : Socle + M1 ✅</li>
+    <li><strong>Phase 3</strong> : M15 · Import massif ⚠️</li>
+    <li><strong>Phase 4</strong> : M16 · Recherche visuelle ⚠️</li>
+    <li><strong>Phase 5</strong> : M18 · Qualité des données 🔴</li>
+    <li><strong>Phase 6</strong> : M5 · 3D + M12 · CAO</li>
+    <li><strong>Phase 7</strong> : M19 · Astuces + M20 · Correspondances</li>
+    <li><strong>Phase 8</strong> : M21 · Ressources + M22 · Événements</li>
+    <li><strong>Phase 9</strong> : M23 · Dépôt + M24 · Retours</li>
+    <li><strong>Phase 10</strong> : M6 · Modération + M26 · Galerie</li>
+    <li><strong>Phase 11</strong> : M27 · CGU/RGPD + M28 · Support</li>
+    <li><strong>Phase 12</strong> : M29 · Crédits et licences</li>
+    <li><strong>Phase 13</strong> : M30 · Stock + M31 · Alertes + M32 · Scan QR</li>
+    <li><strong>Phase 14</strong> : M33 · Entrées/sorties + M34 · Doublons</li>
+    <li><strong>Phase 15</strong> : M35 · Inventaire + M36 · Achats</li>
+    <li><strong>Phase 16</strong> : M8 · Recherche IA + M9 · Panier</li>
+    <li><strong>Phase 17</strong> : M4 · Chantier + M7 · Annuaire</li>
+    <li><strong>Phase 18</strong> : M13 · Versioning + M14 · Historique</li>
+  </ol>
+</div>
+
+<div class="separator"></div>
+
+<p style="color:var(--craie-dim);font-size:13px;text-align:center;margin-top:40px">
+  📖 Documentation finale M1 à M34 · 21 août 2026 · Projet « 203 Atelier » · Architecture générique
+</p>
+
+</div>
+</body>
+</html>
