@@ -1,8 +1,12 @@
 # heritage_hub/server.py
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
 from heritage_hub.core.db import get_db
+from heritage_hub.modules.m1_planches.views import register_routes
 
 app = Flask(__name__)
+
+# Enregistrer les routes du module M1
+register_routes(app)
 
 @app.route("/")
 def index():
@@ -13,4 +17,4 @@ def health():
     return jsonify({"status": "ok"})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
