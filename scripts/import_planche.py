@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from heritage_hub.modules.m1_planches.import import importer_zones
+from heritage_hub.modules.m1_planches.importer import importer_zones
 
 if len(sys.argv) < 2:
     print("Usage: python scripts/import_planche.py chemin/vers/fichier.json [numero_planche]")

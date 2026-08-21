@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planche {{ planche.numero }} — Heritage Hub</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#171A1F;color:#DDD9CF;font-family:sans-serif;padding:20px}
+h1{font-size:24px;color:#7BB0DE;margin-bottom:8px}
+.sous-titre{color:#8B9099;font-size:14px;margin-bottom:16px}
+.planche{position:relative;background:#0E1013;border:1px solid #39404A;border-radius:8px;overflow:hidden;max-width:100%;margin:0 auto}
+.planche img{display:block;width:100%;height:auto}
+.mk{position:absolute;width:30px;height:30px;border-radius:50%;border:2px solid #7BB0DE;background:rgba(23,26,31,.85);color:#7BB0DE;font-family:monospace;font-size:12px;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);cursor:pointer;transition:all .15s}
+.mk:hover{background:#4C7BA8;color:#fff;border-color:#fff;transform:translate(-50%,-50%) scale(1.15)}
+.mk .tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#21252C;border:1px solid #39404A;padding:8px 12px;border-radius:6px;white-space:nowrap;font-size:12px;color:#DDD9CF;z-index:10}
+.mk:hover .tooltip{display:block}
+.fiche{background:#21252C;border:1px solid #39404A;border-radius:8px;padding:16px;margin-top:16px;display:none}
+.fiche.visible{display:block}
+.fiche h2{color:#7BB0DE;font-size:18px;margin-bottom:4px}
+.fiche .ref{font-family:monospace;color:#8B9099;font-size:14px}
+.fiche .detail{margin-top:8px}
+.fiche .detail span{display:inline-block;background:#2A2F38;padding:4px 12px;border-radius:4px;margin-right:8px;font-size:13px}
+.fb{background:#4C7BA8;color:#fff;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;margin-top:8px}
+.fb:hover{background:#7BB0DE}
+</style>
+</head>
+<body>
+<h1>Planche {{ planche.numero }}</h1>
+<p class="sous-titre">{{ planche.titre }} · {{ planche.reperes|length }} repères</p>
+
+<div class="planche" id="planche">
+  <div id="conteneur"></div>
+</div>
+
+<div class="fiche" id="fiche">
+  <h2 id="fiche-titre">Pièce</h2>
+  <div class="ref" id="fiche-ref">Référence</div>
+  <div class="detail" id="fiche-detail"></div>
+  <button class="fb" onclick="fermerFiche()">✕ Fermer</button>
+</div>
+
+<script>
+const planche = {{ planche|tojson }};
+
+function fermerFiche() {
+  document.getElementById('fiche').classList.remove('visible');
+}
+
+function afficherFiche(repere, ref, designation, quantite) {
+  document.getElementById('fiche-titre').textContent = 'Repère ' + repere + ' · ' + designation;
+  document.getElementById('fiche-ref').textContent = 'Réf. ' + ref;
+  document.getElementById('fiche-detail').innerHTML = `<span>Qté : ${quantite}</span>`;
+  document.getElementById('fiche').classList.add('visible');
+}
+
+function initPlanche() {
+  const conteneur = document.getElementById('conteneur');
+  
+  const img = document.createElement('img');
+  img.src = "/static/planche_30.png";
+  img.onerror = function() {
+    this.alt = 'Aucune image trouvée pour cette planche.';
+  };
+  conteneur.appendChild(img);
+  
+  planche.reperes.forEach(r => {
+    if (!r.ancre) return;
+    const mk = document.createElement('div');
+    mk.className = 'mk';
+    const x = r.ancre[0] * 100;
+    const y = r.ancre[1] * 100;
+    mk.style.left = x + '%';
+    mk.style.top = y + '%';
+    mk.textContent = r.repere;
+    
+    const tooltip = document.createElement('span');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = r.reference + ' · ' + r.designation;
+    mk.appendChild(tooltip);
+    
+    mk.addEventListener('click', function(e) {
+      e.stopPropagation();
+      afficherFiche(r.repere, r.reference, r.designation, r.quantite);
+    });
+    
+    conteneur.appendChild(mk);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initPlanche);
+</script>
+</body>
+</html>

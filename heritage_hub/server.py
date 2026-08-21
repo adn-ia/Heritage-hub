@@ -1,11 +1,14 @@
-# heritage_hub/server.py
-from flask import Flask, jsonify
+import os
+from flask import Flask, jsonify, send_from_directory
 from heritage_hub.core.db import get_db
 from heritage_hub.modules.m1_planches.views import register_routes
 
-app = Flask(__name__)
+app = Flask(__name__,
+    template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'templates'),
+    static_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'static'),
+    static_url_path='/static'
+)
 
-# Enregistrer les routes du module M1
 register_routes(app)
 
 @app.route("/")
