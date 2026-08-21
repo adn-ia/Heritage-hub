@@ -924,3 +924,78 @@ CREATE TABLE m29_licence (
 </div>
 </body>
 </html>
+
+<!-- ============================================================ -->
+<!-- SECTION : Gestion multi‑véhicules -->
+<!-- ============================================================ -->
+<h2 id="multivehicule">Gestion multi‑véhicules</h2>
+
+<p>
+  Un utilisateur peut avoir <strong>plusieurs véhicules</strong> en restauration en même temps.
+  Heritage Hub permet de gérer chaque véhicule indépendamment tout en partageant le même socle de données.
+</p>
+
+<h3>Principe</h3>
+<ul>
+  <li>Chaque véhicule est rattaché à un <code>catalogue</code> (ex: "Peugeot 203") et éventuellement à un <code>modele</code> (ex: "203 C").</li>
+  <li>Les modules (catalogue, chantier, stock, panier, etc.) peuvent être <strong>filtrés par véhicule</strong>.</li>
+  <li>Le sélecteur de véhicule est <strong>global</strong> dans l'interface : il définit le contexte de travail.</li>
+</ul>
+
+<h3>Table associée</h3>
+
+<div class="code-block"><code>
+-- Véhicule physique de l'utilisateur
+CREATE TABLE vehicule_utilisateur (
+  id INTEGER PRIMARY KEY,
+  nom TEXT NOT NULL,               -- "Ma 203 C de 1956"
+  catalogue_id INTEGER NOT NULL,   -- "Peugeot 203"
+  modele_id INTEGER,               -- "203 C"
+  annee INTEGER,
+  no_serie TEXT,
+  no_moteur TEXT,
+  actif INTEGER NOT NULL DEFAULT 1,
+  FOREIGN KEY (catalogue_id) REFERENCES catalogue(id),
+  FOREIGN KEY (modele_id) REFERENCES modele(id)
+);
+</code></div>
+
+<h3>Liens avec les modules</h3>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Module</th><th>Lien avec véhicule</th></tr></thead>
+  <tbody>
+    <tr><td><strong>M1 · Planches</strong></td><td>Lié à <code>catalogue_id</code>, donc au véhicule</td></tr>
+    <tr><td><strong>M4 · Chantier</strong></td><td>Chaque ligne est rattachée à <code>vehicule_utilisateur_id</code></td></tr>
+    <tr><td><strong>M30 · Stock</strong></td><td>Peut être global ou rattaché à un véhicule</td></tr>
+    <tr><td><strong>M9 · Panier</strong></td><td>Rattaché à un véhicule (achat pour un véhicule spécifique)</td></tr>
+    <tr><td><strong>M34 · Doublons</strong></td><td>Peut être lié à un véhicule</td></tr>
+    <tr><td><strong>M35 · Inventaire</strong></td><td>Peut être filtré par véhicule</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Sélecteur de véhicule dans l'interface</h3>
+
+<div class="diagram-container">
+<svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <rect x="20" y="20" width="560" height="60" rx="8" fill="#21252C" stroke="#4C7BA8" stroke-width="2"/>
+  <text x="50" y="55" fill="#DDD9CF" font-size="14" font-family="sans-serif">🚗 Sélecteur :</text>
+  <rect x="180" y="35" width="200" height="30" rx="6" fill="#2A2F38" stroke="#7BB0DE" stroke-width="1.5"/>
+  <text x="280" y="55" text-anchor="middle" fill="#7BB0DE" font-size="13" font-family="monospace">Peugeot 203 C ▼</text>
+  <text x="420" y="55" fill="#8B9099" font-size="12">Changer de véhicule</text>
+</svg>
+</div>
+
+<p>
+  Lorsque tu changes de véhicule, l'ensemble des données (catalogue, chantier, stock, etc.) se met à jour pour refléter ce nouveau contexte.
+</p>
+
+<h3>Scénario multi‑véhicules</h3>
+<ol>
+  <li>Tu restaures une <strong>Peugeot 203</strong> et une <strong>Jeep Willys MB</strong> en parallèle.</li>
+  <li>Dans le sélecteur, tu choisis « Peugeot 203 C » : tu vois ses planches, son chantier, son stock.</li>
+  <li>Tu changes pour « Jeep Willys MB » : tout bascule automatiquement.</li>
+  <li>Les pièces, les achats, les mesures et les doublons restent séparés.</li>
+</ol>
